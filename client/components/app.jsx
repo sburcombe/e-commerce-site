@@ -17,6 +17,13 @@ export default class App extends React.Component {
     this.getProducts();
   }
 
+  setView(name, params) {
+    this.setState({
+      name: name,
+      params: params
+    });
+  }
+
   getProducts() {
     fetch('/api/products.php')
       .then(response => {

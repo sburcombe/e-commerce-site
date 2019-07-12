@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './header.jsx';
-import ProductListItem from './product-list-item';
+import ProductList from './product-list';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,21 +21,20 @@ export default class App extends React.Component {
         );
       })
       .then(products => {
-
         this.setState({
           products: products
         });
       });
-
   }
 
   render() {
     return (
       <React.Fragment>
         <Header />
-        <ProductListItem productsFromApp = {this.state.products}/>
+        <div className="container">
+          <ProductList productsFromApp = {this.state.products}/>
+        </div>
       </React.Fragment>
-
     );
   }
 }

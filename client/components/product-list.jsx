@@ -10,7 +10,7 @@ class ProductList extends React.Component {
     return (
       this.props.productsFromApp.length > 0
         ? this.props.productsFromApp.map(product =>
-          <ProductListItem key={product.id} productInfo={product} />)
+          <ProductListItem setView ={this.props.setView} key={product.id} productInfo={product} />)
         : <div> No products received</div>
     );
   }

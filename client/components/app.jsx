@@ -12,6 +12,7 @@ export default class App extends React.Component {
         params: {}
       }
     };
+    this.setView = this.setView.bind(this);
   }
   componentDidMount() {
     this.getProducts();
@@ -19,8 +20,10 @@ export default class App extends React.Component {
 
   setView(name, params) {
     this.setState({
-      name: name,
-      params: params
+      view: {
+        name: name,
+        params: params
+      }
     });
   }
 
@@ -43,7 +46,7 @@ export default class App extends React.Component {
       <React.Fragment>
         <Header />
         <div className="container">
-          <ProductList productsFromApp = {this.state.products}/>
+          <ProductList setView={this.setView} productsFromApp = {this.state.products}/>
         </div>
       </React.Fragment>
     );

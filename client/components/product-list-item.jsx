@@ -1,24 +1,34 @@
 import React from 'react';
 
-function ProductListItem(props) {
-  if (props.productInfo.length === 0) {
-    return (
-      null
-    );
-  } else {
-    return (
-      <div className = "col m-3">
-        <div className="card" style={{ width: 18 + 'rem' }}>
-          <img className="card-img-top" src={props.productInfo.image} alt={props.productInfo.name} style={{ objectFit: 'contain', height: 18 + 'rem' }}></img>
-          <div className="card-body">
-            <p>{'$' + (props.productInfo.price / 100).toFixed(2)}</p>
-            <h5 className="card-title">{props.productInfo.name}</h5>
-            <p className="card-text">{props.productInfo.shortDescription}</p>
+class ProductListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.productClickView = this.productClickView.bind(this);
+  }
+  productClickView() {
+    this.props.setView('details', this.props.productInfo.id);
+  }
+  render() {
+    if (this.props.productInfo.length === 0) {
+      return (
+        null
+      );
+    } else {
+      return (
+        <div className="col m-3">
+          <div className="card" onClick={this.productClickView} style={{ width: 18 + 'rem' }}>
+            <img className="card-img-top" src={this.props.productInfo.image} alt={this.props.productInfo.name} style={{ objectFit: 'contain', height: 18 + 'rem' }}></img>
+            <div className="card-body">
+              <p>{'$' + (this.props.productInfo.price / 100).toFixed(2)}</p>
+              <h5 className="card-title">{this.props.productInfo.name}</h5>
+              <p className="card-text">{this.props.productInfo.shortDescription}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-    );
+      );
+    }
+
   }
 }
 

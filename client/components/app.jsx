@@ -71,7 +71,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'catalog') {
       return (
         <React.Fragment>
-          <Header />
+          <Header cartItemsAmount = {this.state.cart.length} />
           <div className="container">
             <ProductList setView={this.setView} productsFromApp={this.state.products} />
           </div>
@@ -80,7 +80,7 @@ export default class App extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <Header />
+          <Header cartItemsAmount={this.state.cart.length} />
           <div className="container">
             <ProductDetails setView={this.setView} paramsFromApp={this.state.view.params} />
           </div>

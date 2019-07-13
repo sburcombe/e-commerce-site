@@ -20,12 +20,21 @@ export default class App extends React.Component {
   }
 
   setView(name, params) {
-    this.setState({
-      view: {
-        name: name,
-        params: params
-      }
-    });
+    if (this.state.view['name'] === 'catalog') {
+      this.setState({
+        view: {
+          name: name,
+          params: params
+        }
+      });
+    } else {
+      this.setState({
+        view: {
+          name: 'catalog',
+          params: {}
+        }
+      });
+    }
   }
 
   getProducts() {

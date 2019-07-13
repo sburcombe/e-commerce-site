@@ -34,6 +34,7 @@ class ProductDetails extends React.Component {
                 <h5>{this.state.product.name}</h5>
                 <p>{'$' + (this.state.product.price / 100).toFixed(2)}</p>
                 <p >{this.state.product.shortDescription}</p>
+                <button type="button" className="btn btn-success">Add to Cart</button>
               </div>
             </div>
             <div className= "mt-3">

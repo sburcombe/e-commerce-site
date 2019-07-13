@@ -18,6 +18,7 @@ export default class App extends React.Component {
   }
   componentDidMount() {
     this.getProducts();
+    this.getCartItems();
   }
 
   setView(name, params) {

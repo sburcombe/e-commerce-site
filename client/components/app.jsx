@@ -1,8 +1,9 @@
 import React from 'react';
-import Header from './header.jsx';
+import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
-import CartSummaryItem from './cart-summary-item.jsx';
+import CartSummaryItem from './cart-summary-item';
+import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -86,6 +87,28 @@ export default class App extends React.Component {
         });
       });
   }
+  getCartSummaryItem() {
+    return (
+      this.cartItem.length > 0
+        ? this.cartItem.map(cartItem =>
+          <CartSummaryItem key={cartItem.id} item={cartItem}/>)
+        : <div> No Items In Cart</div>
+    );
+  }
+  getCartTotal() {
+    var itemsArray = this.cartItem;
+    var sum = 0;
+    for (var itemIndex = 0; itemIndex < itemsArray.length; itemIndex++) {
+      var currentItemPrice = itemsArray[itemIndex].price;
+      sum += currentItemPrice;
+    }
+    var total = (sum / 100).toFixed(2);
+    return (
+      Number.isNaN(total)
+        ? 'No Items In Cart'
+        : total
+    );
+  }
 
   render() {
     if (this.state.view.name === 'catalog') {
@@ -103,7 +126,7 @@ export default class App extends React.Component {
           <Header cartItemsAmount={this.state.cart.length} />
           <div className="container">
             <ProductDetails addToCart={this.addToCart} setView={this.setView} paramsFromApp={this.state.view.params} />
-            <CartSummaryItem cartItems={this.state.cart}/>
+            <CartSummary cartItem={this.state.cart} getItems={this.getCartSummaryItem} cartTotal={this.getCartTotal} />
           </div>
         </React.Fragment>
 

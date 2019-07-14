@@ -120,16 +120,24 @@ export default class App extends React.Component {
           </div>
         </React.Fragment>
       );
-    } else {
+    } else if (this.state.view.name === 'details') {
       return (
         <React.Fragment>
           <Header cartItemsAmount={this.state.cart.length} />
           <div className="container">
             <ProductDetails addToCart={this.addToCart} setView={this.setView} paramsFromApp={this.state.view.params} />
-            <CartSummary cartItem={this.state.cart} getItems={this.getCartSummaryItem} cartTotal={this.getCartTotal} />
           </div>
         </React.Fragment>
 
+      );
+    } else if (this.state.view.name === 'cart') {
+      return (
+        <React.Fragment>
+          <Header cartItemsAmount={this.state.cart.length} />
+          <div className="container">
+            <CartSummary cartItem={this.state.cart} getItems={this.getCartSummaryItem} cartTotal={this.getCartTotal} />
+          </div>
+        </React.Fragment>
       );
     }
 

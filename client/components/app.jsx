@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header.jsx';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummaryItem from './cart-summary-item.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -102,6 +103,7 @@ export default class App extends React.Component {
           <Header cartItemsAmount={this.state.cart.length} />
           <div className="container">
             <ProductDetails addToCart={this.addToCart} setView={this.setView} paramsFromApp={this.state.view.params} />
+            <CartSummaryItem cartItems={this.state.cart}/>
           </div>
         </React.Fragment>
 

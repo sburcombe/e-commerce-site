@@ -4,5 +4,7 @@
      "success"=>false,
      "error"=> $error.GetMessage()
    )
+
+   $json_output =json_encode($output);
  }
 ?>

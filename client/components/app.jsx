@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
-import CartSummaryItem from './cart-summary-item';
 import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
@@ -43,28 +42,12 @@ export default class App extends React.Component {
   }
 
   setView(name, params) {
-    if (event.target.id === 'back-to-catalog') {
-      this.setState({
-        view: {
-          name: 'catalog',
-          params: {}
-        }
-      });
-    } else if (this.state.view['name'] === 'catalog') {
-      this.setState({
-        view: {
-          name: name,
-          params: params
-        }
-      });
-    } else if (event.target.id === 'shopping-cart') {
-      this.setState({
-        view: {
-          name: 'cart',
-          params: {}
-        }
-      });
-    }
+    this.setState({
+      view: {
+        name: name,
+        params: params
+      }
+    });
   }
 
   getProducts() {
@@ -94,28 +77,6 @@ export default class App extends React.Component {
         });
       });
   }
-  getCartSummaryItem() {
-    return (
-      this.cartItem.length > 0
-        ? this.cartItem.map(cartItem =>
-          <CartSummaryItem key={cartItem.id} item={cartItem}/>)
-        : <div> No Items In Cart</div>
-    );
-  }
-  getCartTotal() {
-    var itemsArray = this.cartItem;
-    var sum = 0;
-    for (var itemIndex = 0; itemIndex < itemsArray.length; itemIndex++) {
-      var currentItemPrice = itemsArray[itemIndex].price;
-      sum += currentItemPrice;
-    }
-    var total = (sum / 100).toFixed(2);
-    return (
-      Number.isNaN(total)
-        ? 'No Items In Cart'
-        : total
-    );
-  }
 
   render() {
     if (this.state.view.name === 'catalog') {
@@ -142,11 +103,10 @@ export default class App extends React.Component {
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
-            <CartSummary setView={this.setView} cartItem={this.state.cart} getItems={this.getCartSummaryItem} cartTotal={this.getCartTotal} />
+            <CartSummary setView={this.setView} cartItem={this.state.cart} cartTotal={this.getCartTotal} />
           </div>
         </React.Fragment>
       );
     }
-
   }
 }

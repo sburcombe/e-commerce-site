@@ -1,16 +1,43 @@
 import React from 'react';
+import CartSummaryItem from './cart-summary-item';
 
-function CartSummary(props) {
-  return (
-    <div className="col-sm-8 table-container">
-      <button type="button" id="back-to-catalog" onClick={() => props.setView('catalog')} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
-      <h3>My Cart</h3>
-      <div>
-        {props.getItems()}
+class CartSummary extends React.Component {
+
+  getCartSummaryItem(props) {
+    return (
+      this.props.cartItem.length > 0
+        ? this.props.cartItem.map(cartItem =>
+          <CartSummaryItem key={cartItem.id} item={cartItem} />)
+        : <div> No Items In Cart</div>
+    );
+  }
+  getCartTotal() {
+    var itemsArray = this.props.cartItem;
+    var sum = 0;
+    for (var itemIndex = 0; itemIndex < itemsArray.length; itemIndex++) {
+      var currentItemPrice = itemsArray[itemIndex].price;
+      sum += currentItemPrice;
+    }
+    var total = (sum / 100).toFixed(2);
+    return (
+      Number.isNaN(total)
+        ? 'No Items In Cart'
+        : total
+    );
+  }
+  render() {
+    return (
+      <div className="col-sm-8 table-container">
+        <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
+        <h3>My Cart</h3>
+        <div>
+          {this.getCartSummaryItem()}
+        </div>
+        <h3> Item Total:  $ {this.getCartTotal()}</h3>
       </div>
-      <h3> Item Total:  $ {props.cartTotal()}</h3>
-    </div>
-  );
+    );
+  }
+
 }
 
 export default CartSummary;

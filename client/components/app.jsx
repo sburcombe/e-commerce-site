@@ -78,6 +78,37 @@ export default class App extends React.Component {
       });
   }
 
+  placeOrder(orderDetails) {
+
+    this.setState({
+      cart: {
+        cart: this.state.cart,
+        orderDetails
+      }
+    });
+    fetch('/api/orders.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderDetails)
+    })
+      .then(response => {
+        return response.json();
+      }
+      ).then(cartProduct => {
+        this.setState({
+          cart: [],
+          view: {
+            name: 'catalog',
+            params: {}
+          }
+        });
+      }
+      )
+      .catch(error => console.error('error: ', error));
+  }
+
   render() {
     if (this.state.view.name === 'catalog') {
       return (

@@ -25,7 +25,7 @@ class ProductDetails extends React.Component {
       return (
         <React.Fragment>
           <div className="container">
-            <button type="button" onClick={this.props.setView} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
+            <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
             <div className="row">
               <div className="col-lg-8 col-md-6 mt-3">
                 <img className="img-fluid" src={this.state.product.image} alt={this.state.product.name} ></img>
@@ -40,7 +40,6 @@ class ProductDetails extends React.Component {
             <div className= "mt-3">
               <p>{this.state.product.longDescription}</p>
             </div></div>
-
         </React.Fragment>
       );
     } else {

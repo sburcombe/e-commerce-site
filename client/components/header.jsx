@@ -9,7 +9,7 @@ function Header(props) {
         <img className = "p-2"src="shopping-cart.png" style={{ height: 150 + 'px', width: 150 + 'px' }}></img>
         <div className ="p-2 ml-5">
           <h4 className ="d-inline-block ml-5">{props.cartItemsAmount + ' items'}</h4>
-          <i className="fa fa-shopping-cart fa-2x d-inline-block"></i>
+          <i className="fa fa-shopping-cart fa-2x d-inline-block" id="shopping-cart" onClick={() => props.setView('cart')}></i>
         </div>
       </div>
     </div>

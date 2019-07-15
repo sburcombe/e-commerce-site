@@ -11,7 +11,6 @@ function CartSummaryItem(props) {
           <h5>{props.item.name}</h5>
           <p>{'$' + (props.item.price / 100).toFixed(2)}</p>
           <p >{props.item.shortDescription}</p>
-          <button type="button" className="btn btn-success">Add to Cart</button>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 <?php
- function error_handler(error){
+ function error_handler($error){
    $output = array(
-     "success"=>false
+     "success"=>false,
+     "error"=> $error.GetMessage()
    )
  }
 ?>

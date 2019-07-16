@@ -19,11 +19,15 @@ $result = mysqli_query($conn, $query);
 
 if (!$result){
   throw new Exception('error with query: ' . mysqli_error($conn));
+} else if(!empty($_GET['id']) && !mysqli_num_rows($result) ) {
+  throw new Exception('invalid ID: ' . $_GET['id']);
 }
 $data = [];
 while($row = mysqli_fetch_assoc($result)){
   $data[] = $row;
 }
+
+
 
 print(json_encode($data));
 ?>

@@ -26,8 +26,10 @@ $data = [];
 while($row = mysqli_fetch_assoc($result)){
   $data[] = $row;
 }
+if(empty($_GET['id'])){
+  print(json_encode($data));
+} else {
+    print(json_encode($data[0]));
+}
 
-
-
-print(json_encode($data));
 ?>

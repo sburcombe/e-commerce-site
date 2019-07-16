@@ -27,21 +27,22 @@ class CartSummary extends React.Component {
   }
   render() {
     return (
-      <div className="col-sm-8 table-container">
-        <div>
-          <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
-          <h3>My Cart</h3>
+      <React.Fragment>
+        <div className="col-sm-8 table-container">
           <div>
-            {this.getCartSummaryItem()}
+            <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
+            <h3>My Cart</h3>
+            <div>
+              {this.getCartSummaryItem()}
+            </div>
           </div>
         </div>
-        <div className="d-flex">
-
-          <h3 className = "p-2"> Item Total:  $ {this.getCartTotal()}</h3>
+        <div className="d-flex justify-content-around mw-100">
+          <h3 className="p-2"> Item Total:  $ {this.getCartTotal()}</h3>
           <button type="button" id="checkout" onClick={() => this.props.setView('checkout', {})} className="btn btn-outline-primary m-auto ml-5 p-2">Checkout</button>
-
         </div>
-      </div>
+      </React.Fragment>
+
     );
   }
 

@@ -3,7 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
-// import CheckoutForm from './checkout-form';
+import CheckoutForm from './checkout-form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -135,6 +135,7 @@ export default class App extends React.Component {
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
             <CartSummary setView={this.setView} cartItem={this.state.cart} cartTotal={this.getCartTotal} />
+            <CheckoutForm/>
           </div>
         </React.Fragment>
       );

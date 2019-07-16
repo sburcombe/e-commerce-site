@@ -28,16 +28,18 @@ class CartSummary extends React.Component {
   render() {
     return (
       <div className="col-sm-8 table-container">
-        <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
-        <h3>My Cart</h3>
         <div>
-          {this.getCartSummaryItem()}
-        </div>
-        <div className="col-sm-8 table-container">
-          <div className="row">
-            <h3> Item Total:  $ {this.getCartTotal()}</h3>
-            <button type="button" id="checkout" onClick={() => this.props.setView('checkout', {})} className="btn btn-outline-primary mt-3">Checkout</button>
+          <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Back to Catalog</button>
+          <h3>My Cart</h3>
+          <div>
+            {this.getCartSummaryItem()}
           </div>
+        </div>
+        <div className="d-flex">
+
+          <h3 className = "p-2"> Item Total:  $ {this.getCartTotal()}</h3>
+          <button type="button" id="checkout" onClick={() => this.props.setView('checkout', {})} className="btn btn-outline-primary m-auto ml-5 p-2">Checkout</button>
+
         </div>
       </div>
     );

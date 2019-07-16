@@ -33,7 +33,12 @@ class CartSummary extends React.Component {
         <div>
           {this.getCartSummaryItem()}
         </div>
-        <h3> Item Total:  $ {this.getCartTotal()}</h3>
+        <div className="col-sm-8 table-container">
+          <div className="row">
+            <h3> Item Total:  $ {this.getCartTotal()}</h3>
+            <button type="button" id="checkout" onClick={() => this.props.setView('checkout', {})} className="btn btn-outline-primary mt-3">Checkout</button>
+          </div>
+        </div>
       </div>
     );
   }

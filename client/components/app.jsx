@@ -135,7 +135,15 @@ export default class App extends React.Component {
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
             <CartSummary setView={this.setView} cartItem={this.state.cart} cartTotal={this.getCartTotal} />
-            <CheckoutForm/>
+          </div>
+        </React.Fragment>
+      );
+    } else if (this.state.view.name === 'checkout') {
+      return (
+        <React.Fragment>
+          <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
+          <div className="container">
+            <CheckoutForm />
           </div>
         </React.Fragment>
       );

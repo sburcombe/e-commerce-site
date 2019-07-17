@@ -24,6 +24,8 @@ if (!$result){
 }
 $data = [];
 while($row = mysqli_fetch_assoc($result)){
+  $row['id'] = intval($row['id']);
+  $row['price'] = intval($row['price']);
   $data[] = $row;
 }
 if(empty($_GET['id'])){

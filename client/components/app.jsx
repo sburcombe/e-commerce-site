@@ -19,12 +19,26 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.getCartTotal = this.getCartTotal.bind(this);
   }
   componentDidMount() {
     this.getProducts();
     this.getCartItems();
   }
-
+  getCartTotal() {
+    var itemsArray = this.state.cart;
+    var sum = 0;
+    for (var itemIndex = 0; itemIndex < itemsArray.length; itemIndex++) {
+      var currentItemPrice = itemsArray[itemIndex].price;
+      sum += currentItemPrice;
+    }
+    var total = (sum / 100).toFixed(2);
+    return (
+      Number.isNaN(total)
+        ? 'No Items In Cart'
+        : total
+    );
+  }
   addToCart(product) {
     fetch('/api/cart.php', {
       method: 'POST',
@@ -139,7 +153,7 @@ export default class App extends React.Component {
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
-            <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} />
+            <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} cartItem={this.state.cart} cartTotal={this.getCartTotal} />
           </div>
         </React.Fragment>
       );

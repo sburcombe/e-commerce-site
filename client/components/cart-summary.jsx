@@ -11,20 +11,7 @@ class CartSummary extends React.Component {
         : <div> No Items In Cart</div>
     );
   }
-  getCartTotal() {
-    var itemsArray = this.props.cartItem;
-    var sum = 0;
-    for (var itemIndex = 0; itemIndex < itemsArray.length; itemIndex++) {
-      var currentItemPrice = itemsArray[itemIndex].price;
-      sum += currentItemPrice;
-    }
-    var total = (sum / 100).toFixed(2);
-    return (
-      Number.isNaN(total)
-        ? 'No Items In Cart'
-        : total
-    );
-  }
+
   render() {
     return (
       <React.Fragment>
@@ -37,8 +24,8 @@ class CartSummary extends React.Component {
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-around ">
-          <h3 className="p-2"> Item Total:  $ {this.getCartTotal()}</h3>
+        <div className="d-flex justify-content-around">
+          <h3 className="p-2"> Item Total:  $ {this.props.cartTotal()}</h3>
           <button type="button" id="checkout" onClick={() => this.props.setView('checkout', {})} className="btn btn-outline-primary m-auto ml-5 p-2">Checkout</button>
 
         </div>

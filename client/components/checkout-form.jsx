@@ -26,11 +26,22 @@ class CheckoutForm extends React.Component {
     });
   }
 
+  handleSubmit() {
+    var name = this.state.name;
+    var creditCard = this.state.creditCard;
+    var shippingAddress = this.state.shippingAddress;
+    var objectDetails = {
+      name,
+      creditCard,
+      shippingAddress
+    };
+    return this.props.placeOrder(objectDetails);
+  }
+
   render() {
     return (
       <div>
-        <h3>Order Total</h3>
-        <h3> $ 0.00</h3>
+        <h3>Order Total: $ {this.props.cartTotal()}</h3>
         <form>
           <div className="form-group">
             <label htmlFor="nameInput">Name</label>
@@ -48,7 +59,7 @@ class CheckoutForm extends React.Component {
         </form>
         <div className="d-flex justify-content-around">
           <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Continue Shopping</button>
-          <button type="input" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Place Order</button>
+          <button type="input" id="back-to-catalog" onClick={() => this.handleSubmit()} className="btn btn-outline-secondary mt-3">Place Order</button>
         </div>
 
       </div>

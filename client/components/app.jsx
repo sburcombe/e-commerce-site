@@ -139,7 +139,7 @@ export default class App extends React.Component {
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
-            <CheckoutForm placeOrder={this.placeOrder} />
+            <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} />
           </div>
         </React.Fragment>
       );

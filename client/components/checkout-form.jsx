@@ -29,6 +29,8 @@ class CheckoutForm extends React.Component {
   render() {
     return (
       <div>
+        <h3>Order Total</h3>
+        <h3> $ 0.00</h3>
         <form>
           <div className="form-group">
             <label htmlFor="nameInput">Name</label>
@@ -44,6 +46,11 @@ class CheckoutForm extends React.Component {
             <textarea className="form-control" id="shippingAddressTextarea" rows="3"></textarea>
           </div>
         </form>
+        <div className="d-flex justify-content-around">
+          <button type="button" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Continue Shopping</button>
+          <button type="input" id="back-to-catalog" onClick={() => this.props.setView('catalog', {})} className="btn btn-outline-secondary mt-3">Place Order</button>
+        </div>
+
       </div>
 
     );

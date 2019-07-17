@@ -8,6 +8,9 @@ class CheckoutForm extends React.Component {
       creditCard: '',
       shippingAddress: ''
     };
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleCreditCardChange = this.handleCreditCardChange.bind(this);
+    this.handleShippingAddressChange = this.handleShippingAddressChange.bind(this);
   }
 
   handleNameChange(event) {
@@ -45,16 +48,16 @@ class CheckoutForm extends React.Component {
         <form>
           <div className="form-group">
             <label htmlFor="nameInput">Name</label>
-            <input type="input" className="form-control" id="nameInput"></input>
+            <input type="input" className="form-control" id="nameInput" onChange={this.handleNameChange}></input>
           </div>
           <div className="form-group">
             <label htmlFor="creditCardInput">Credit Card</label>
-            <input type="input" className="form-control" id="creditCardInput" ></input>
+            <input type="input" className="form-control" id="creditCardInput" onChange={this.handleCreditCardChange} ></input>
           </div>
 
           <div className="form-group">
             <label htmlFor="shippingAddressTextarea">Shipping Address</label>
-            <textarea className="form-control" id="shippingAddressTextarea" rows="3"></textarea>
+            <textarea className="form-control" id="shippingAddressTextarea" rows="3" onChange={this.handleShippingAddressChange}></textarea>
           </div>
         </form>
         <div className="d-flex justify-content-around">

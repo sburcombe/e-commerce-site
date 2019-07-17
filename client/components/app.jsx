@@ -18,6 +18,7 @@ export default class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
   componentDidMount() {
     this.getProducts();
@@ -80,12 +81,7 @@ export default class App extends React.Component {
   }
 
   placeOrder(orderDetails) {
-    this.setState({
-      cart: {
-        cart: this.state.cart,
-        orderDetails
-      }
-    });
+    orderDetails['cart'] = this.state.cart;
     fetch('/api/orders.php', {
       method: 'POST',
       headers: {
@@ -143,7 +139,7 @@ export default class App extends React.Component {
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
-            <CheckoutForm />
+            <CheckoutForm placeOrder={this.placeOrder} />
           </div>
         </React.Fragment>
       );

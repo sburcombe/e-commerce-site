@@ -9,16 +9,16 @@ if (!empty($_GET['id'])) {
     throw new Exception('id needs to be a number');
   }
   $query = "SELECT products.id, products.name, products.price, products.shortDescription, products.longDescription,
-  GROUP_CONCAT(images.img_url) AS images
-    FROM products JOIN images ON  products.id  =  images.product_id
-    WHERE  products.id =  $id
-    GROUP BY products.id ";
+            GROUP_CONCAT(images.img_url) AS images
+            FROM products JOIN images ON  products.id  =  images.product_id
+            WHERE  products.id =  $id
+            GROUP BY products.id ";
 
 
 } else {
   $query = "SELECT products.id, products.name, products.price, products.shortDescription,
-  (SELECT img_url FROM images WHERE product_id = products.id LIMIT 1)
-  AS image FROM products";
+          (SELECT img_url FROM images WHERE product_id = products.id LIMIT 1)
+          AS image FROM products";
 }
 
 $result = mysqli_query($conn, $query);
@@ -33,6 +33,7 @@ $data = [];
 while($row = mysqli_fetch_assoc($result)){
   $row['id'] = intval($row['id']);
   $row['price'] = intval($row['price']);
+  $row['images'] = explode(",",$row['images']);
   $data[] = $row;
 }
 if(empty($_GET['id'])){

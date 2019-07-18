@@ -8,12 +8,19 @@ if (!empty($_GET['id'])) {
   if(!is_numeric($id)){
     throw new Exception('id needs to be a number');
   }
-  $whereClause = "WHERE id = " . $id;
+  $query = "SELECT products.id, products.name, products.price, products.shortDescription, products.longDescription,
+  GROUP_CONCAT(images.img_url) AS images
+    FROM products JOIN images ON  products.id  =  images.product_id
+    WHERE  products.id =  $id
+    GROUP BY products.id ";
+
+
 } else {
-  $whereClause = '';
+  $query = "SELECT products.id, products.name, products.price, products.shortDescription,
+  (SELECT img_url FROM images WHERE product_id = products.id LIMIT 1)
+  AS image FROM products";
 }
 
-$query = "SELECT * FROM products " . $whereClause;
 $result = mysqli_query($conn, $query);
 
 

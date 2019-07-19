@@ -23,4 +23,14 @@ require_once('functions.php');
 session_start();
 set_exception_handler('error_handler');
 require_once('db_connection.php');
+
+switch($method){
+
+  case 'POST':
+    requires_once('cart_add.php');
+    break;
+  case 'GET':
+    requires_once('cart_get.php');
+    break;
+}
 ?>

@@ -2,7 +2,8 @@
 require_once('functions.php');
 set_exception_handler('error_handler');
 startup();
-require_once('db_connection.php');
+
+
 if (!empty($_GET['id'])) {
   $id = $_GET['id'];
   if(!is_numeric($id)){
@@ -18,9 +19,9 @@ if (!empty($_GET['id'])) {
 } else {
   $query = "SELECT products.id, products.name, products.price, products.shortDescription,
           (SELECT img_url FROM images WHERE product_id = products.id LIMIT 1)
-          AS image FROM products";
+          AS images FROM products";
 }
-
+require_once('db_connection.php');
 $result = mysqli_query($conn, $query);
 
 

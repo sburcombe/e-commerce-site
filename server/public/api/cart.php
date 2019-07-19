@@ -18,4 +18,7 @@ if ($method == 'GET') {
   ]));
 }
 
+define('INTERNAL', true);
+require_once('functions.php');
+
 ?>

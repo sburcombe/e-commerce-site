@@ -18,8 +18,8 @@
 
  function getBodyData(){
   $json_input = file_get_contents('php://input');
-  $json_input = json_decode($json_input, true);
-  return $json_input;
+  $data_structure = json_decode($json_input, true);
+  return $data_structure;
  }
 
 ?>

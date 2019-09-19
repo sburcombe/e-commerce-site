@@ -3,7 +3,6 @@ require_once('functions.php');
 set_exception_handler('error_handler');
 startup();
 
-
 if (!empty($_GET['id'])) {
   $id = $_GET['id'];
   if(!is_numeric($id)){

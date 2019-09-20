@@ -134,7 +134,7 @@ export default class App extends React.Component {
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
           <div className="container">
-            <ProductDetails addToCart={this.addToCart} setView={this.setView} paramsFromApp={this.state.view.params} />
+            <ProductDetails addToCart={this.addToCart} setView={this.setView} paramsFromApp={this.state.view.params} productsFromApp={this.state.products} />
           </div>
         </React.Fragment>
 

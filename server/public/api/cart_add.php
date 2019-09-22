@@ -19,22 +19,22 @@ if (empty($_SESSION['cartId'])) {
 }
 print_r("cart id ". $cartId);
 //query to  get the price from products for the given id
-$query = "SELECT `price` FROM products WHERE `id` = $productId";
+$priceQuery = "SELECT `price` FROM products WHERE `id` = $productId";
 //send the query to the database and store the result
-$result = mysqli_query($conn, $query);
+$priceResult = mysqli_query($conn, $priceQuery);
 
 
 //make sure the result is valid and throw an exception if there isn't one
 //check how mnany rows came back
-if (!$result) {
+if (!$priceResult) {
   throw new Exception('error with query: ' . mysqli_error($conn));
-} else if (!empty($bodyData['id']) && !mysqli_num_rows($result)) {
+} else if (!empty($bodyData['id']) && !mysqli_num_rows($priceResult)) {
   throw new Exception('invalid ID: ' . $bodyData['id']);
 }
 //extract the data for the row form the database, store the results
 //into productData
 $productData = [];
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($priceResult)) {
   // $row['id'] = intval($row['id']);
   // $row['price'] = intval($row['price']);
   // $row['images'] = explode(",", $row['images']);
@@ -69,4 +69,10 @@ if (!$transactionResult){
   print_r('cartId '. $cartId);
 }
 
+$insertCartItemQuery =
+"INSERT INTO `cartItems`
+  SET `count`=1, `productID`=$productId, `price`=$productData, `added`= NOW(),
+  `cartID`= $cartId
+  ON DUPLICATE KEY UPDATE `count`=`count` + 1 ";
+  //left off at step 10.xvi.h
 ?>

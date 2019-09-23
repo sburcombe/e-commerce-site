@@ -33,14 +33,8 @@ if (!$priceResult) {
 }
 //extract the data for the row form the database, store the results
 //into productData
-$productData = [];
-while ($row = mysqli_fetch_assoc($priceResult)) {
-  // $row['id'] = intval($row['id']);
-  // $row['price'] = intval($row['price']);
-  // $row['images'] = explode(",", $row['images']);
-  $productData[] = $row;
-}
-print_r($productData);
+
+$row = mysqli_fetch_assoc($priceResult);
 
 $transactionQuery = "START TRANSACTION";
 $transactionResult = mysqli_query($conn, $transactionQuery);
@@ -50,12 +44,12 @@ if (!$transactionResult){
 } else if (!$cartId){
   /*if our cart ID is false, make an insert query to insert a new entry into the cart table
     Do NOT specify the id, it is auto incrementing.  specify 'created' as being equal to the mysql function NOW()*/
-  $insertQuery = "INSERT INTO `cart`
+  $insertCartQuery = "INSERT INTO `cart`
                   SET `created` = NOW()";
 
   //send query to mysql and get the result
-  $insertResult = mysqli_query($conn, $insertQuery);
-  if(!$insertResult){
+  $insertCartResult = mysqli_query($conn, $insertCartQuery);
+  if(!$insertCartResult){
     throw new Exception ('error with insert ' . mysqli_error($conn));
   }
   //Use mysqli affected rows to see if a row was inserted or not
@@ -71,8 +65,21 @@ if (!$transactionResult){
 
 $insertCartItemQuery =
 "INSERT INTO `cartItems`
-  SET `count`=1, `productID`=$productId, `price`=$productData, `added`= NOW(),
+  SET `count`=1, `productID`=$productId, `price`={$row['price']}, `added`= NOW(),
   `cartID`= $cartId
   ON DUPLICATE KEY UPDATE `count`=`count` + 1 ";
-  //left off at step 10.xvi.h
+$insertCartItemResult = mysqli_query($conn, $insertCartItemQuery);
+if (!$insertCartItemResult) {
+  throw new Exception('error with insert ' . mysqli_error($conn));
+}
+//check to make sure your query updated AT LEAST 1 row. If not, send this query to mysql: "ROLLBACK"
+//this will undo the cart insert so you don't have partial inserts
+if (mysqli_affected_rows($conn) != 1) {
+  $rollbackQuery = "ROLLBACK";
+  mysqli_query($conn, $rollbackQuery);
+  throw new Exception('rows inserted do not equal 1');
+};
+print_r($insertCartItemResult);
+$commitQuery = "COMMIT";
+mysqli_query($conn, $commitQuery);
 ?>

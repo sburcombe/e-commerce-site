@@ -32,7 +32,7 @@ if (!$priceResult) {
   throw new Exception('invalid ID: ' . $bodyData['id']);
 }
 //extract the data for the row form the database, store the results
-//into productData
+
 
 $row = mysqli_fetch_assoc($priceResult);
 

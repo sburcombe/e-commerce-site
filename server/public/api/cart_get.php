@@ -27,11 +27,21 @@ INNER JOIN cartItems ON cartItems.productID = products.id WHERE cartItems.cartID
 
 //Retrieve the data you got from the query and print it out.
 //If there is nothing there, make sure it prints out an empty array
-if(!$cartItemsQueryResult){
-  print(json_encode([]));
-} else{
-  print(json_encode($cartItemsQueryResult));
+$data=[];
+if (!$cartItemsQueryResult) {
+  print(json_encode($data));
+} else {
+  while ($row = mysqli_fetch_assoc($cartItemsQueryResult)) {
+    $row['id'] = intval($row['id']);
+    $row['price'] = intval($row['price']);
+    $row['images'] = explode(",", $row['images']);
+    $data[] = $row;
 }
+  print(json_encode($data));
+}
+
+
+
 
 //left off with the final query testing accurately but not printing what I
 //am expecting.  Possibly has to do with the SESSION? Might need to test

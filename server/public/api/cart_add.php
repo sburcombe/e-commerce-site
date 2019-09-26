@@ -6,18 +6,24 @@ require_once('db_connection.php');
     exit();
   }
 $bodyData = getBodyData();
-$productId = intval($bodyData['productId']);
-print_r($productId);
-if($productId <= 0){
-  throw new Exception('Product Id must be greater than 0');
+if(empty($bodyData['productId'])){
+  throw new Exception('Must have a productId to add to cart');
 }
+$productId = intval($bodyData['productId']);
+// print_r($productId);
+
+if(is_numeric($productId) && $productId <=0){
+  throw new Exception('Product Id must be a valid Id' . $productId);
+}
+
+
 
 if (empty($_SESSION['cartId'])) {
   $cartId = false;
 } else {
   $cartId = $_SESSION['cartId'];
 }
-print_r("cart id ". $cartId);
+// print_r("cart id ". $cartId);
 //query to  get the price from products for the given id
 $priceQuery = "SELECT `price` FROM products WHERE `id` = $productId";
 //send the query to the database and store the result
@@ -28,8 +34,8 @@ $priceResult = mysqli_query($conn, $priceQuery);
 //check how mnany rows came back
 if (!$priceResult) {
   throw new Exception('error with query: ' . mysqli_error($conn));
-} else if (!empty($bodyData['id']) && !mysqli_num_rows($priceResult)) {
-  throw new Exception('invalid ID: ' . $bodyData['id']);
+} else if (!empty($bodyData['productId']) && !mysqli_num_rows($priceResult)) {
+  throw new Exception('invalid ID: ' . $bodyData['productId']);
 }
 //extract the data for the row form the database, store the results
 
@@ -60,7 +66,7 @@ if (!$transactionResult){
   //store it into both cartId and $_SESSION[`cartId`]
   $cartId = mysqli_insert_id($conn);
   $_SESSION['cartId'] = mysqli_insert_id($conn);
-  print_r('cartId '. $cartId);
+  // print_r('cartId '. $cartId);
 }
 
 $insertCartItemQuery =
@@ -79,7 +85,7 @@ if (mysqli_affected_rows($conn) != 1) {
   mysqli_query($conn, $rollbackQuery);
   throw new Exception('rows inserted do not equal 1');
 };
-print_r($insertCartItemResult);
+// print_r($insertCartItemResult);
 $commitQuery = "COMMIT";
 mysqli_query($conn, $commitQuery);
 ?>

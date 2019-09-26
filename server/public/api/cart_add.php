@@ -1,10 +1,10 @@
 <?php
 require_once('functions.php');
 require_once('db_connection.php');
-  // if(!defined('INTERNAL')){
-  //   print('Direct access not allowed');
-  //   exit();
-  // }
+  if(!defined('INTERNAL')){
+    print('Direct access not allowed');
+    exit();
+  }
 $bodyData = getBodyData();
 $productId = intval($bodyData['productId']);
 print_r($productId);

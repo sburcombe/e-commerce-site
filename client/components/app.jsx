@@ -45,7 +45,7 @@ export default class App extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify({ 'productId': product.id })
     })
       .then(response => {
         return response.json();

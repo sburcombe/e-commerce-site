@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 
 
-// $item = file_get_contents('php://input');
+$item = file_get_contents('php://input');
 
 // if ($method == 'GET') {
 //   readfile('dummy-cart-items.json');
@@ -26,13 +26,17 @@ require_once('db_connection.php');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+// $item = file_get_contents('php://input');
 switch($method){
 
   case 'POST':
     require_once('cart_add.php');
+    // http_response_code(201);
+    print($item);
     break;
   case 'GET':
     require_once('cart_get.php');
+
     break;
 }
 ?>

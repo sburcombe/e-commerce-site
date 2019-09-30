@@ -73,19 +73,22 @@ $insertCartItemQuery =
 "INSERT INTO `cartItems`
   SET `count`=1, `productID`=$productId, `price`={$row['price']}, `added`= NOW(),
   `cartID`= $cartId
-  ON DUPLICATE KEY UPDATE `count`=`count` + 1 ";
+  ON DUPLICATE KEY UPDATE `count`= `count` + 1 ";
 $insertCartItemResult = mysqli_query($conn, $insertCartItemQuery);
 if (!$insertCartItemResult) {
   throw new Exception('error with insert ' . mysqli_error($conn));
 }
 //check to make sure your query updated AT LEAST 1 row. If not, send this query to mysql: "ROLLBACK"
 //this will undo the cart insert so you don't have partial inserts
-if (mysqli_affected_rows($conn) != 1) {
+if (mysqli_affected_rows($conn) < 1) {
   $rollbackQuery = "ROLLBACK";
   mysqli_query($conn, $rollbackQuery);
   throw new Exception('rows inserted do not equal 1');
 };
-// print_r($insertCartItemResult);
+
+
 $commitQuery = "COMMIT";
 mysqli_query($conn, $commitQuery);
+
+
 ?>

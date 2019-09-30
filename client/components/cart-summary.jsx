@@ -4,6 +4,7 @@ import CartSummaryItem from './cart-summary-item';
 class CartSummary extends React.Component {
 
   getCartSummaryItem(props) {
+
     return (
       this.props.cartItem.length > 0
         ? this.props.cartItem.map(cartItem =>

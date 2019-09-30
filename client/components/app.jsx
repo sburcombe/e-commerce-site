@@ -45,16 +45,9 @@ export default class App extends React.Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(product)
-    })
-      .then(response => {
-        return response.json();
-      }
-      ).then(cartProduct => {
-        this.setState({ cart: [...this.state.cart, cartProduct] });
-      }
-      )
-      .catch(error => console.error('error: ', error));
+      body: JSON.stringify({ 'productId': product.id })
+    }).catch(error => console.error('error: ', error));
+    this.getCartItems();
   }
 
   setView(name, params) {

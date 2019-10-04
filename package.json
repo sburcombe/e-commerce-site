@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "A full stack LAMP & React shopping cart app.",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack --mode=production",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server",
+    "build": "node ./node_modules/webpack/bin/webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {

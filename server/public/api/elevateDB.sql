@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 19, 2019 at 06:19 PM
+-- Generation Time: Oct 09, 2019 at 11:56 PM
 -- Server version: 5.7.26-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.1
 
@@ -114,6 +114,13 @@ ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cartItems`
+--
+ALTER TABLE `cartItems`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cartproductid` (`productID`,`cartID`);
+
+--
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -133,6 +140,11 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cartItems`
+--
+ALTER TABLE `cartItems`
   MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `images`

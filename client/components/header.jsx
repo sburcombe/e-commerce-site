@@ -2,14 +2,21 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <div className="justify-content-center d-flex">
+    <div className="container">
       {/* <div className="d-flex border border-dark justify-content-center align-items-center mt-2 ml-5"
         style= {{ height: 155 + 'px', width: 700 + 'px' }}> */}
+      <div className = "row">
+        <img className="col" src="./images/elevatelogo.jpg" ></img>
+        <div className ="col mt-1">
+          <div className = "row">
 
-      <img className="p-2" src="./images/elevatelogo.jpg" style={{ height: 150 + 'px', width: 800 + 'px', left: 0 }}></img>
-      <div className ="p-2 ml-5 mr-5 mt-1 border">
-        <h4 className ="d-inline-block  ml-3">{props.cartItemsAmount + ' items'}</h4>
-        <i className="fa fa-shopping-cart fa-2x d-inline-block" id="shopping-cart" onClick={() => props.setView('cart')}></i>
+            <div className="col border">
+              <h3 className =" d-inline-block ml-3 text-center">{props.cartItemsAmount + ' items'}</h3>
+              <i className="  fa fa-shopping-cart fa-2x " id="shopping-cart" onClick={() => props.setView('cart')}></i>
+            </div>
+            <div className="col-sm"></div>
+          </div>
+        </div>
       </div>
     </div>
 

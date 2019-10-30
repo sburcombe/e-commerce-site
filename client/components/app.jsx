@@ -4,6 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import SecondaryHeader from './secondary-header';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -117,6 +118,7 @@ export default class App extends React.Component {
       return (
         <React.Fragment>
           <Header setView= {this.setView} cartItemsAmount ={this.state.cart.length} />
+          <SecondaryHeader></SecondaryHeader>
           <div className="container">
             <ProductList setView={this.setView} productsFromApp={this.state.products} />
           </div>
@@ -126,6 +128,7 @@ export default class App extends React.Component {
       return (
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
+          <SecondaryHeader></SecondaryHeader>
           <div className="container">
             <ProductDetails addToCart={this.addToCart} setView={this.setView} paramsFromApp={this.state.view.params} productsFromApp={this.state.products} />
           </div>
@@ -136,6 +139,7 @@ export default class App extends React.Component {
       return (
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
+          <SecondaryHeader></SecondaryHeader>
           <div className="container">
             <CartSummary setView={this.setView} cartItem={this.state.cart} cartTotal={this.getCartTotal} />
           </div>
@@ -145,6 +149,7 @@ export default class App extends React.Component {
       return (
         <React.Fragment>
           <Header setView={this.setView} cartItemsAmount={this.state.cart.length} />
+          <SecondaryHeader></SecondaryHeader>
           <div className="container">
             <CheckoutForm setView={this.setView} placeOrder={this.placeOrder} cartItem={this.state.cart} cartTotal={this.getCartTotal} />
           </div>
